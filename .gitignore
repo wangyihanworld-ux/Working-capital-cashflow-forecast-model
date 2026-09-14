@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+node_modules/
+.qa/
+demo_output/
+deliverables/
+*.xlsx
+*.xls
+*.csv
+
