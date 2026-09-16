@@ -1,5 +1,7 @@
 # 营运资金与现金流预测模型
 
+[![tests](https://github.com/wangyihanworld-ux/Working-capital-cashflow-forecast-model/actions/workflows/tests.yml/badge.svg)](https://github.com/wangyihanworld-ux/Working-capital-cashflow-forecast-model/actions/workflows/tests.yml)
+
 这是作品集项目五，面向财务BP、FP&A和商业分析岗位。项目使用完全合成的数据，将销售、客户回款、库存采购、供应商付款和经营费用连接到月度现金余额，量化DSO、DIO、DPO和现金转换周期，并识别不同经营情景下的资金缺口。
 
 > 所有企业、客户、供应商、金额和假设均为程序生成，不对应任何真实业务或银行账户。
