@@ -1,5 +1,7 @@
 # 营运资金与现金流预测模型
 
+[English](README.en.md) · 中文
+
 [![tests](https://github.com/wangyihanworld-ux/Working-capital-cashflow-forecast-model/actions/workflows/tests.yml/badge.svg)](https://github.com/wangyihanworld-ux/Working-capital-cashflow-forecast-model/actions/workflows/tests.yml)
 
 这是作品集项目五，面向财务BP、FP&A和商业分析岗位。项目使用完全合成的数据，将销售、客户回款、库存采购、供应商付款和经营费用连接到月度现金余额，量化DSO、DIO、DPO和现金转换周期，并识别不同经营情景下的资金缺口。
@@ -69,3 +71,11 @@ python -m unittest discover -s tests -v
 
 详细字段见[数据字典](docs/data-dictionary.md)，实施状态见[项目计划](docs/project-plan.md)。
 
+
+## 边界处理（2026-10-15）
+
+历史数据须至少12个连续月份；同月不同日会归一化后查重。金额与假设必须有限，增长率不能低于-100%，允许期初现金为负。
+
+库存目标降低时先消耗现存库存，采购下限为0；多余库存继续结转，单列目标库存和超目标库存。不假设供应商退货、报废或现金变现。应收、应付目标分别不超过本期可用余额，以避免负回款和负付款。受约束时实际周转天数可能偏离目标。
+
+零收入、零成本或零采购时，相应周转天数和CCC无定义，在Excel中留空；CCC均值只统计有定义月份。现金与库存勾稽继续计算。26项测试覆盖这些边界。
