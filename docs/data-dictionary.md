@@ -22,3 +22,7 @@
 
 增长情景用于说明快速增长也可能消耗现金；改善情景同时缩短DSO和DIO、合理延长DPO。模型不会自动注入融资，因此资金缺口保持可见。
 
+
+
+## 2026-10-15 boundary policy
+Purchases cannot be negative. Excess inventory is carried and consumed, with `target_inventory_mn` and `inventory_above_target_mn` reported. AR/AP targets are capped at available balances. Undefined DSO/DIO/DPO/CCC are blank; mean CCC covers only defined observations. Monthly dates are normalized, continuous, and span at least 12 periods.

@@ -10,12 +10,20 @@ def build_forecast(history,assumption):
     rows=[]
     for i,month in enumerate(months):
         revenue=float(prior.iloc[i].revenue_mn)*(1+float(p.revenue_growth)); cogs=revenue*float(p.cogs_rate); opex=revenue*float(p.opex_rate)
-        ar=revenue*12*float(p.dso)/365; inventory=cogs*12*float(p.dio)/365
-        purchases=cogs+inventory-opening_inv; ap=purchases*12*float(p.dpo)/365
+        # Targets cannot create negative collections, purchases or supplier payments.
+        ar=min(revenue*12*float(p.dso)/365, opening_ar+revenue)
+        target_inventory=cogs*12*float(p.dio)/365
+        purchases=max(cogs+target_inventory-opening_inv, 0.0)
+        inventory=opening_inv+purchases-cogs
+        ap=min(purchases*12*float(p.dpo)/365, opening_ap+purchases)
         collections=revenue+opening_ar-ar; supplier=purchases+opening_ap-ap
         ocf=collections-supplier-opex; cash=opening_cash+ocf; gap=max(float(p.minimum_cash_mn)-cash,0)
-        dso=ar/(revenue*12)*365; dio=inventory/(cogs*12)*365; dpo=ap/(purchases*12)*365; ccc=dso+dio-dpo
-        rows.append({'scenario':p.scenario,'month':month,'revenue_mn':revenue,'collections_mn':collections,'cogs_mn':cogs,'opening_inventory_mn':opening_inv,'purchases_mn':purchases,'ending_inventory_mn':inventory,'opening_ar_mn':opening_ar,'ending_ar_mn':ar,'opening_ap_mn':opening_ap,'ending_ap_mn':ap,'supplier_payments_mn':supplier,'opex_mn':opex,'operating_cashflow_mn':ocf,'opening_cash_mn':opening_cash,'ending_cash_mn':cash,'funding_gap_mn':gap,'dso':dso,'dio':dio,'dpo':dpo,'ccc':ccc})
+        # A zero denominator means an undefined ratio, not zero days.
+        dso=ar/(revenue*12)*365 if revenue else float('nan')
+        dio=inventory/(cogs*12)*365 if cogs else float('nan')
+        dpo=ap/(purchases*12)*365 if purchases else float('nan')
+        ccc=dso+dio-dpo
+        rows.append({'scenario':p.scenario,'month':month,'revenue_mn':revenue,'collections_mn':collections,'cogs_mn':cogs,'opening_inventory_mn':opening_inv,'purchases_mn':purchases,'target_inventory_mn':target_inventory,'inventory_above_target_mn':max(inventory-target_inventory,0.0),'ending_inventory_mn':inventory,'opening_ar_mn':opening_ar,'ending_ar_mn':ar,'opening_ap_mn':opening_ap,'ending_ap_mn':ap,'supplier_payments_mn':supplier,'opex_mn':opex,'operating_cashflow_mn':ocf,'opening_cash_mn':opening_cash,'ending_cash_mn':cash,'funding_gap_mn':gap,'dso':dso,'dio':dio,'dpo':dpo,'ccc':ccc})
         opening_ar,opening_inv,opening_ap,opening_cash=ar,inventory,ap,cash
     return pd.DataFrame(rows)
 
