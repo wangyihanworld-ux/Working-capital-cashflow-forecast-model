@@ -36,7 +36,7 @@
 - DSO、DIO、DPO驱动的应收、库存和应付滚动；
 - 客户回款、采购、供应商付款、经营现金流和现金余额预测；
 - 最低现金要求与逐月资金缺口预警；
-- 一键输出合成输入文件和含12张工作表的管理报告；
+- 一键输出合成输入文件和含14张工作表的管理报告；
 - 20项自动化测试覆盖四套守恒关系、情景方向和输入边界。
 
 ## 一键运行
@@ -78,4 +78,17 @@ python -m unittest discover -s tests -v
 
 库存目标降低时先消耗现存库存，采购下限为0；多余库存继续结转，单列目标库存和超目标库存。不假设供应商退货、报废或现金变现。应收、应付目标分别不超过本期可用余额，以避免负回款和负付款。受约束时实际周转天数可能偏离目标。
 
-零收入、零成本或零采购时，相应周转天数和CCC无定义，在Excel中留空；CCC均值只统计有定义月份。现金与库存勾稽继续计算。26项测试覆盖这些边界。
+零收入、零成本或零采购时，相应周转天数和CCC无定义，在Excel中留空；CCC均值只统计有定义月份。现金与库存勾稽继续计算。30项测试覆盖这些边界。
+
+## Profit-to-cash evidence and model scope
+
+`python -m working_capital.evidence` writes a monthly profit-to-cash bridge and controlled DSO/DIO/DPO sensitivities to `docs/evidence/`. The standard report also includes these two tables.
+
+Under this model's assumptions: operating profit - change in receivables - change in inventory + change in payables = operating cash flow. Operating expenses are entirely cash expenses. Tax, depreciation adjustments, capital expenditure, borrowing and financing repayments are excluded. This is not a complete statutory cash flow statement or three-statement model.
+
+Amounts are millions of the synthetic scenario currency. DSO/DIO/DPO use month-end balances divided by annualized current-month flows; DPO uses purchases, not COGS. These are scenario approximations, not observed invoice settlement times. Minimum-cash shortfall is a threshold gap, not automatically funded debt. Single-driver sensitivities change only one assumption; combined scenarios cannot be attributed solely to CCC.
+
+
+## 2026年10月26日复核
+
+本轮新增功能、规则来源和适用限制见 [复核记录](docs/review-20261026.md)。实现与自动测试有AI辅助，不能代表本人独立编写、用户试用或企业采用。历史测试数属于当时版本，本轮结果见交付证据。
