@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-26",
+  "tests": 32,
+  "subtests": 0,
+  "exit_code": 0,
+  "command": "python -m pytest -q --tb=short -p no:cacheprovider",
+  "tested_code_commit": "8cfebf33978cfbdd3ceb38419a17653eed54c026",
+  "source_sha256": {
+    "tests\\test_boundaries.py": "aeeae1236aaa1ffffd4bd1e182613a1121c99e2e14514ea98c688e76ef6c6536",
+    "tests\\test_comparison.py": "80a54523f7ac75ca71feed459394aea63866550a1dd47742ecdd08772da64af4",
+    "tests\\test_evidence.py": "ead367eeb1d9f3a6152fe29f570f32e8a05c8c7f1f9da1822e86d4ef3ef8975f",
+    "tests\\test_model.py": "2baced8a1377d284a5d0acaf32c218cccaf89a74a075a0d38ac41220dc2ff124",
+    "src\\working_capital\\comparison.py": "10cb8067bda2f43ff61b27dd7f911c7668fae5cde6958ef47874d803e0eccbbe",
+    "src\\working_capital\\demo.py": "be16823efebac5da43747acbe9fdff662180881d87980bfca7f3b551aea57e70",
+    "src\\working_capital\\evidence.py": "f0edf64df5bedb2e8cb7259c42c49bf1fc23772ac50d4a0b5493528e4b4c96cf",
+    "src\\working_capital\\model.py": "53ef3c8a3f548433def5a4781293bd5a04f84361011813fe77dc44d8d6664f8e",
+    "src\\working_capital\\reporting.py": "ad74c585644c33c75470026be4cda86a6293f4311860b92e315502496ffbcfd9",
+    "src\\working_capital\\synthetic.py": "667c52174b1dfce2fba004d5d02a4cf33a1aad6b22ea6ec2b4c6b11d378b00b4",
+    "src\\working_capital\\validation.py": "b20d2267802f2f2cf232188d93e76b15c79ae9e290938e38049342d36ee843f7",
+    "src\\working_capital\\__init__.py": "6674edca49b1a96db3ef66192bb0932e612be0ed0927433067f108dc5639a58f"
+  },
+  "validation": "AI-assisted local validation; not remote CI or user acceptance",
+  "environment": "Windows Python 3.14; project .testenv or .warehouse-env; worktree TEMP"
+}
