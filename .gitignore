@@ -10,3 +10,7 @@ deliverables/
 *.xls
 *.csv
 
+
+.pytest_cache/
+pytest-cache-files-*/
+!docs/evidence/*.csv

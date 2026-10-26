@@ -7,8 +7,9 @@ from openpyxl.chart.data_source import StrRef
 from openpyxl.styles import Font,PatternFill,Alignment,Border,Side
 from openpyxl.utils import get_column_letter
 from .model import summarize_scenarios
+from .evidence import profit_cash_bridge,one_factor_sensitivity
 
-REPORT_SHEETS=['管理摘要','情景比较','现金流预测','营运资金','应收账款','库存与采购','应付账款','现金转换周期','资金缺口预警','历史数据','情景假设','数据质量']
+REPORT_SHEETS=['管理摘要','情景比较','现金流预测','营运资金','应收账款','库存与采购','应付账款','现金转换周期','资金缺口预警','历史数据','情景假设','数据质量','利润现金桥','单因素敏感性']
 H={'scenario':'情景','month':'月份','revenue_mn':'收入（百万元）','collections_mn':'客户回款（百万元）','cogs_mn':'销售成本（百万元）','opening_inventory_mn':'期初库存（百万元）','purchases_mn':'采购（百万元）','ending_inventory_mn':'期末库存（百万元）','opening_ar_mn':'期初应收（百万元）','ending_ar_mn':'期末应收（百万元）','opening_ap_mn':'期初应付（百万元）','ending_ap_mn':'期末应付（百万元）','supplier_payments_mn':'供应商付款（百万元）','opex_mn':'经营费用（百万元）','operating_cashflow_mn':'经营现金流（百万元）','opening_cash_mn':'期初现金（百万元）','ending_cash_mn':'期末现金（百万元）','funding_gap_mn':'资金缺口（百万元）','dso':'DSO（天）','dio':'DIO（天）','dpo':'DPO（天）','ccc':'CCC（天）','minimum_cash_mn':'最低现金（百万元）','maximum_funding_gap_mn':'最大资金缺口（百万元）','average_ccc':'平均CCC（天）','revenue_growth':'收入增长率','cogs_rate':'销售成本率','opex_rate':'经营费用率'}
 H.update({'target_inventory_mn':'目标库存（百万元）','inventory_above_target_mn':'超目标库存（百万元）'})
 H['net_working_capital_mn']='净营运资金（百万元）'
@@ -54,6 +55,12 @@ def generate_report(history,assumptions,path):
     checks=[{'检查项':key,'结果':'通过' if value.abs().max()<1e-8 else '异常'} for key,value in residuals.items()]
     checks.append({'检查项':'CCC无定义月份（所有情景）','结果':str(int(f.ccc.isna().sum()))})
     write(q,pd.DataFrame(checks))
+    bridge=profit_cash_bridge(f)
+    write(wb.create_sheet('利润现金桥'),bridge)
+    selected=assumptions[assumptions.scenario.eq('基准')].iloc[0].to_dict()
+    write(wb.create_sheet('单因素敏感性'),one_factor_sensitivity(history,selected))
+    ws['A18']='范围：合成经营现金情景；不含税款、资本开支和融资。金额单位：百万元。'
+    ws['A19']='DPO按采购额，周转指标为月末余额/当月流量年化；不是实际回款或付款天数。'
     for sh in wb.worksheets: fmt(sh)
     out=Path(path); out.parent.mkdir(parents=True,exist_ok=True); wb.save(out); return out
 
@@ -69,3 +76,12 @@ def generate_demo_artifacts(folder):
         fmt(ws)
     iw.save(inp)
     return inp,generate_report(d.history,d.assumptions,p/'营运资金与现金流预测报告.xlsx')
+
+# Labels used by the newly integrated evidence schedules.
+H.update({'operating_profit_mn':'经营利润（百万元）','ar_cash_effect_mn':'应收变动现金影响（百万元）',
+          'inventory_cash_effect_mn':'库存变动现金影响（百万元）','ap_cash_effect_mn':'应付变动现金影响（百万元）',
+          'indirect_ocf_mn':'间接法经营现金（百万元）','direct_ocf_mn':'直接法经营现金（百万元）',
+          'reconciliation_difference_mn':'现金勾稽差异（百万元）','driver':'单一变动参数','base_days':'基准天数',
+          'scenario_days':'情景天数','delta_days':'变化天数','change_vs_base_mn':'期末现金较基准变化（百万元）',
+          'maximum_gap_mn':'最大资金缺口（百万元）','zero_purchase_months':'零采购月份数',
+          'above_target_inventory_months':'超目标库存月份数'})
