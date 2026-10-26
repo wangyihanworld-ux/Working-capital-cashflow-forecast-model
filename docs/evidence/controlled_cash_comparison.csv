@@ -1,0 +1,6 @@
+scenario,target_ccc,minimum_cash_assumption_mn,minimum_month_end_cash_mn,maximum_month_end_gap_mn,gap_months,longest_gap_months,ending_cash_mn
+base,68,75.0,164.45371368541544,0.0,0,0,245.40835120615515
+turnover_only,40,75.0,222.03135591452636,0.0,0,0,332.60265026057505
+opex_only,68,75.0,170.48268216898728,0.0,0,0,269.28785900557796
+combined,40,75.0,223.92712329893044,0.0,0,0,356.48215805999797
+collection_inventory_stress,93,75.0,77.92387868391921,0.0,0,0,165.1969503907025
