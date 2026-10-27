@@ -1,5 +1,7 @@
 # 营运资金与现金流预测模型
 
+[运行与最新验证](docs/validation-latest.md)
+
 [English](README.en.md) · 中文
 
 [![tests](https://github.com/wangyihanworld-ux/Working-capital-cashflow-forecast-model/actions/workflows/tests.yml/badge.svg)](https://github.com/wangyihanworld-ux/Working-capital-cashflow-forecast-model/actions/workflows/tests.yml)
