@@ -26,6 +26,12 @@ python -m unittest discover -s tests -v
 
 ## Interpretation and limitations
 
-Monthly annualization uses a 365-day convention. Excess inventory is not assumed to be returned, written off or converted to cash. Mean CCC excludes undefined months. Tax, capex, debt service, dividends and FX cash flows are outside scope. This is not a daily liquidity schedule.
+Monthly annualization uses a 365-day convention. Excess inventory is not assumed to be returned, written off or converted to cash. Mean CCC excludes undefined months. Tax, capex, debt service, dividends and FX cash flows are outside scope. The original monthly model is not a daily liquidity schedule; the new settlement overlay requires explicit dated receipts and payments.
 
 Business examples use synthetic data and contain no private company or customer records. Only the separately labelled World Bank case in the macro repository uses public economic observations. Refer to current source and CI for this update; older release tags and screenshots describe earlier snapshots.
+
+## Settlement timing and available cash
+
+The standard demo now also writes daily liquidity and invoice-level settlement CSVs. Expected receipts are reconciled to actual net cash and partial allocations. Scenarios keep actual receipts fixed and compare only unpaid balances. Stablecoin assumptions include conversion and redemption delays, fees, price deviations, eligibility, minimum redemption sizes and shared daily capacity. Token receipt alone is never counted as bank cash.
+
+Run `python -m working_capital.settlement_demo`. See the [input contract and limitations](docs/settlement-analysis.md) and [synthetic comparison](docs/settlement-results.md). No live bank, exchange or blockchain connection is enabled.

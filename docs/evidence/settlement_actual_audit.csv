@@ -1,0 +1,2 @@
+receipt_id,invoice_id,actual_date,applied_mn,cash_mn,expected_date,days_vs_expected,cash_difference_mn
+SYN-R001,SYN-001,2027-01-08,20.0,19.9,2027-01-20,-12,-0.10000000000000142

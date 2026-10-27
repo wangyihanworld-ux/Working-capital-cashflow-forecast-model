@@ -1,27 +1,32 @@
 {
   "date": "2026-10-27",
-  "tests": 32,
-  "subtests": 0,
-  "test_framework": "pytest",
+  "tests": 52,
+  "subtests": "Parameterized subtests are not counted separately",
+  "test_framework": "unittest",
   "test_exit_code": 0,
   "demo_exit_codes": {
     "working_capital.demo": 0,
     "working_capital.evidence": 0,
-    "working_capital.comparison": 0
+    "working_capital.comparison": 0,
+    "working_capital.settlement_demo": 0
   },
   "source_sha256_lf_normalized": {
     "src/working_capital/__init__.py": "6185e8832969b8590ccecaf5f8c9af03473a7ba0b468717b957774e2174cc4f0",
     "src/working_capital/comparison.py": "10cb8067bda2f43ff61b27dd7f911c7668fae5cde6958ef47874d803e0eccbbe",
-    "src/working_capital/demo.py": "c2cf517430aa215dc8436fafc7bb60dca87703228864a27bf3c38323b9a968d1",
+    "src/working_capital/demo.py": "55045449fcfb833fe80b038a8fa5766a0cd782f668418183031d8328ac883314",
     "src/working_capital/evidence.py": "f0edf64df5bedb2e8cb7259c42c49bf1fc23772ac50d4a0b5493528e4b4c96cf",
     "src/working_capital/model.py": "501467036193206f6478dfc8b0ab494252b966cbd01f65d004ed6660abaa4547",
     "src/working_capital/reporting.py": "9cb6a92edfbd8ae03d21f69131f9033bd00a55e35b56d221ded06ce18868630f",
+    "src/working_capital/settlement.py": "a6596b4e204cc06f0ea6dc548b1df7e66b18fad34cc582e0f7eab8b517175d5c",
+    "src/working_capital/settlement_demo.py": "d99836ed9932c0a4d8fb3204b0fd39c555c4269b9b8c0a16731c6a7c585e38bc",
     "src/working_capital/synthetic.py": "f9c7596e17327cda10e8d5f407b8e3af19c6fb74a86bb683ac5c074a1ab6c202",
     "src/working_capital/validation.py": "305688b001270a967ca2aeb416c6b680e02093f1d743f7c177e2fc80951dfbab",
     "tests/test_boundaries.py": "f66946878019d9701caba848ed1dcc8819418ddc9acc742a2180bca2d12bc3a6",
     "tests/test_comparison.py": "80a54523f7ac75ca71feed459394aea63866550a1dd47742ecdd08772da64af4",
     "tests/test_evidence.py": "ead367eeb1d9f3a6152fe29f570f32e8a05c8c7f1f9da1822e86d4ef3ef8975f",
-    "tests/test_model.py": "c2f9418c4ce03e99e3a87cc0cc984e1662da66c67535f0dbb3a5c08bbc1c4576"
+    "tests/test_model.py": "c2f9418c4ce03e99e3a87cc0cc984e1662da66c67535f0dbb3a5c08bbc1c4576",
+    "tests/test_settlement.py": "afab09a2c9aeb068e2fe7d35821cd8789f787bcf813fba09d401770e52d64e9f"
   },
-  "limits": "AI-assisted local verification; not evidence of deployment, user acceptance or business outcomes."
+  "limits": "AI-assisted local verification; not evidence of deployment, user acceptance or business outcomes.",
+  "csv_roundtrip_equal": true
 }

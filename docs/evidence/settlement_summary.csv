@@ -1,0 +1,7 @@
+scenario,minimum_daily_cash_mn,maximum_gap_mn,gap_days,longest_gap_days,gap_mn_days,ending_cash_mn,realized_forecast_fees_mn,realized_price_effect_mn,unsettled_face_mn,peak_gap_reduction_vs_base_mn,gap_days_reduction_vs_base,ending_cash_change_vs_base_mn
+bank_base,-50.1,55.1,15,15,676.5,19.9,0.0,0.0,0.0,0.0,0,0.0
+bank_earlier_collection,10.0,0.0,0,0,0.0,19.66000000000001,0.24,0.0,0.0,55.1,15,-0.23999999999998778
+stablecoin_fast_transfer_only,-50.1,55.1,15,15,678.8980000000001,19.18059999999999,0.5994,-0.11999999999999744,0.0,0.0,0,-0.7194000000000074
+stablecoin_earlier_collection,10.0,0.0,0,0,0.0,19.1806,0.5994,-0.11999999999999744,0.0,55.1,15,-0.7194000000000003
+stablecoin_stress,-53.55,58.55,13,13,633.55,11.620000000000012,2.28,-6.0,0.0,-3.4499999999999957,2,-8.279999999999987
+stablecoin_redemption_blocked,-100.1,105.1,20,20,1601.9999999999995,-100.1,0.0,0.0,120.0,-49.99999999999999,-5,-120.0

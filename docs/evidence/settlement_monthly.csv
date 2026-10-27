@@ -1,0 +1,7 @@
+scenario,month,actual_cash_mn,forecast_cash_mn,outflow_mn,ending_cash_mn,maximum_daily_gap_mn
+bank_base,2027-01-01,19.9,120.0,130.0,19.9,55.1
+bank_earlier_collection,2027-01-01,19.9,119.76,130.0,19.66000000000001,0.0
+stablecoin_earlier_collection,2027-01-01,19.9,119.28059999999999,130.0,19.1806,0.0
+stablecoin_fast_transfer_only,2027-01-01,19.9,119.28059999999999,130.0,19.18059999999999,55.1
+stablecoin_redemption_blocked,2027-01-01,19.9,0.0,130.0,-100.1,105.1
+stablecoin_stress,2027-01-01,19.9,111.72000000000001,130.0,11.620000000000012,58.55
